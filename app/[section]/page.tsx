@@ -15,7 +15,7 @@ export default async function SectionPage({ params }: { params: Promise<{ sectio
     supabase.auth.getUser(),
     supabase
       .from("events")
-      .select("id, title, category, format, city, starts_at, capacity, description")
+      .select("id, title, category, format, city, starts_at, capacity, description, creator_id")
       .eq("status", "published")
       .gte("starts_at", new Date().toISOString())
       .order("starts_at", { ascending: true })
