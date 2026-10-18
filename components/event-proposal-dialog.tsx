@@ -96,7 +96,7 @@ export function EventProposalDialog({
           </form>
         ) : (
           <div className="auth-gate">
-            <p>Sign in to submit a proposal that is saved to your CollabSphere account.</p>
+            <p>Sign in to submit a proposal that is saved to your Collabverse account.</p>
             <Link href="/auth" className={buttonVariants()}>Sign in to continue <ArrowRight size={15} /></Link>
           </div>
         )}

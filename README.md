@@ -1,6 +1,6 @@
-# CollabSphere
+# Collabverse
 
-CollabSphere is a responsive community and meetup platform concept for distributed student communities. Its Aurora Spatial interface pairs approximate, city-level community signals with Supabase-backed authentication and event proposals.
+Collabverse is a responsive community and meetup platform concept for distributed student communities. Its Aurora Spatial interface pairs approximate, city-level community signals with Supabase-backed authentication and event proposals.
 
 ## What works in this build
 
@@ -24,7 +24,7 @@ Open the local Next.js URL to explore the app. Open `index.html` directly for th
 
 ## Supabase configuration
 
-The connected project has already been provisioned with the CollabSphere schema, Supabase Auth profile trigger, and RLS policies. Configure these public application variables for another deployment:
+The connected project has already been provisioned with the Collabverse schema, Supabase Auth profile trigger, and RLS policies. Configure these public application variables for another deployment:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` (or the project publishable key, using the matching value)

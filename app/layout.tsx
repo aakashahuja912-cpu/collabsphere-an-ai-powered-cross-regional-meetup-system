@@ -12,12 +12,12 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: {
-    default: "CollabSphere — your community is closer than you think",
-    template: "%s · CollabSphere",
+    default: "Collabverse — your community is closer than you think",
+    template: "%s · Collabverse",
   },
   description:
     "Meet people nearby, plan better gatherings, and build connections across the IIT Madras BS community.",
-  applicationName: "CollabSphere",
+  applicationName: "Collabverse",
   keywords: ["community", "student meetups", "IIT Madras BS", "events"],
 }
 
