@@ -3,7 +3,7 @@ import { PlatformShell } from "@/components/platform-shell"
 import { demoEvents, type EventSummary } from "@/lib/demo-data"
 import { createClient } from "@/lib/supabase/server"
 
-const sections = ["map", "discover", "events", "venuevote", "copilot", "network", "leaderboard", "notifications", "profile"] as const
+const sections = ["map", "discover", "events", "venuevote", "copilot", "network", "leaderboard", "notifications", "profile", "admin"] as const
 
 export default async function SectionPage({ params }: { params: Promise<{ section: string }> }) {
   const { section } = await params
@@ -22,11 +22,11 @@ export default async function SectionPage({ params }: { params: Promise<{ sectio
       .limit(8),
   ])
   const [{ data: profile }, { data: proposals }] = await Promise.all([
-    user ? supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle() : Promise.resolve({ data: null }),
+    user ? supabase.from("profiles").select("display_name, role").eq("id", user.id).maybeSingle() : Promise.resolve({ data: null }),
     user ? supabase.from("events").select("id, title, category, format, city, starts_at, capacity, status, description").eq("creator_id", user.id).order("created_at", { ascending: false }).limit(5) : Promise.resolve({ data: null }),
   ])
   const currentUser = user
-    ? { id: user.id, email: user.email ?? "", displayName: profile?.display_name ?? user.user_metadata?.display_name ?? "Student" }
+    ? { id: user.id, email: user.email ?? "", displayName: profile?.display_name ?? user.user_metadata?.display_name ?? "Student", role: profile?.role ?? "student" }
     : null
   const eventSummaries = [...(events ?? []).map((event) => ({ ...event, isDemo: false } as EventSummary)), ...demoEvents]
 
