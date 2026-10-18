@@ -8,7 +8,7 @@ import { CollaborationNetwork } from "@/components/collaboration-network"
 import { HouseLeaderboard } from "@/components/house-leaderboard"
 import { MeetupActions } from "@/components/meetup-actions"
 import { PeerDiscovery } from "@/components/peer-discovery"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -45,7 +45,7 @@ function MapPage({ events }: { events: EventSummary[] }) {
   return (
     <div className="map-page-layout">
       <Card className="section-panel"><div className="card-heading"><div><span className="eyebrow">ILLUSTRATIVE REGIONAL SIGNALS</span><h2>Possibility has a place</h2></div><span className="map-key map-key-cyan" /></div><div className="map-panel-tall"><RegionalMap events={events} tall /></div></Card>
-      <Card className="section-panel"><div className="card-heading"><div><span className="eyebrow">BROAD, NOT PRECISE</span><h2>Regions in the demo</h2></div></div><div>{communitySignals.map((signal) => <div className="region-stat" key={signal.city}><MapPin size={14} color="#45e3ff" /><span>{signal.city}<small style={{ display: "block", marginTop: 3, color: "#77829b", fontSize: 8 }}>{signal.label}</small></span><strong>{String(signal.count).padStart(2, "0")}</strong></div>)}</div><p className="leaderboard-note">Illustrative city-level activity. No residential locations or individual positions are shown.</p><Button variant="outline" render={<Link href="/events" />}>Browse example events <ArrowRight size={14} /></Button></Card>
+      <Card className="section-panel"><div className="card-heading"><div><span className="eyebrow">BROAD, NOT PRECISE</span><h2>Regions in the demo</h2></div></div><div>{communitySignals.map((signal) => <div className="region-stat" key={signal.city}><MapPin size={14} color="#45e3ff" /><span>{signal.city}<small style={{ display: "block", marginTop: 3, color: "#77829b", fontSize: 8 }}>{signal.label}</small></span><strong>{String(signal.count).padStart(2, "0")}</strong></div>)}</div><p className="leaderboard-note">Illustrative city-level activity. No residential locations or individual positions are shown.</p><Link href="/events" className={buttonVariants({ variant: "outline" })}>Browse example events <ArrowRight size={14} /></Link></Card>
     </div>
   )
 }

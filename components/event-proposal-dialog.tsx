@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowRight, Sparkles } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -97,7 +97,7 @@ export function EventProposalDialog({
         ) : (
           <div className="auth-gate">
             <p>Sign in to submit a proposal that is saved to your CollabSphere account.</p>
-            <Button render={<Link href="/auth" />}>Sign in to continue <ArrowRight size={15} /></Button>
+            <Link href="/auth" className={buttonVariants()}>Sign in to continue <ArrowRight size={15} /></Link>
           </div>
         )}
       </DialogContent>

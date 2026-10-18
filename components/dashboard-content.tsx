@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, ArrowUpRight, Clock3, Compass, MapPin, Sparkles, Users, Vote } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { RegionalMap } from "@/components/regional-map"
 import type { EventSummary } from "@/lib/demo-data"
@@ -59,7 +59,7 @@ export function DashboardContent({
     <div className="dashboard-page float-in">
       <div className="welcome-row">
         <div><div className="eyebrow">WELCOME, {displayName.toUpperCase()} <span className="eyebrow-dot" /> COMMUNITY PULSE</div><h1>Find your people, <span>wherever you are.</span></h1><p>A smaller world starts with one shared interest.</p></div>
-        <div className="welcome-actions"><Button variant="outline" render={<Link href="/discover" />}><Compass /> Explore community</Button><Button onClick={() => onCreate() }><Sparkles /> Plan a meetup</Button></div>
+        <div className="welcome-actions"><Link href="/discover" className={buttonVariants({ variant: "outline" })}><Compass /> Explore community</Link><Button onClick={() => onCreate() }><Sparkles /> Plan a meetup</Button></div>
       </div>
 
       <div className="demo-ribbon"><span className="demo-dot" /> DEMO SPACE <span>Fictional events and regional signals · no live student data</span><Link href="/welcome">How the demo works <ArrowRight size={13} /></Link></div>
@@ -83,14 +83,14 @@ export function DashboardContent({
 
       <section className="overview-grid" aria-label="Upcoming community events and regional map">
         <Card className="content-card event-card">
-          <div className="card-heading"><div><span className="eyebrow">A REASON TO GET TOGETHER</span><h2>Coming up</h2></div><Button variant="ghost" size="sm" render={<Link href="/events" />}>All events <ArrowRight /></Button></div>
+          <div className="card-heading"><div><span className="eyebrow">A REASON TO GET TOGETHER</span><h2>Coming up</h2></div><Link href="/events" className={buttonVariants({ variant: "ghost", size: "sm" })}>All events <ArrowRight /></Link></div>
           <div className="event-list">{nextEvents.map((event) => <EventRow event={event} key={event.id} />)}</div>
           {nextEvents.length === 0 && <p className="empty-note">New events will show up here.</p>}
           <button type="button" className="online-session" onClick={() => onNotify("Online session suggestions use fictional demo information.")}><span className="online-icon"><Clock3 size={15} /></span><span><b>Good ideas have no postcode.</b><small>Browse an online session for this week</small></span><ArrowRight size={15} /></button>
         </Card>
 
         <Card className="content-card map-card">
-          <div className="card-heading"><div><span className="eyebrow">FOUR REGIONS · ONE COMMUNITY</span><h2>Community, in view</h2></div><Button variant="ghost" size="icon-sm" aria-label="Open community map" render={<Link href="/map" />}><ArrowUpRight /></Button></div>
+          <div className="card-heading"><div><span className="eyebrow">FOUR REGIONS · ONE COMMUNITY</span><h2>Community, in view</h2></div><Link href="/map" aria-label="Open community map" className={buttonVariants({ variant: "ghost", size: "icon-sm" })}><ArrowUpRight /></Link></div>
           <div className="mini-map-wrap"><RegionalMap events={events} /></div>
           <div className="map-caption"><span><span className="map-key map-key-cyan" /> Example regional signals</span><Link href="/map">Explore the map <ArrowRight size={13} /></Link></div>
         </Card>
@@ -108,7 +108,7 @@ export function DashboardContent({
           <h3>Where should we meet?</h3><p>Compare three fictional Lucknow spots for the AI & chai demo event.</p>
           <div className="venue-vote-bar"><span style={{ width: "46%" }} /><span style={{ width: "34%" }} /><span style={{ width: "20%" }} /></div>
           <div className="venue-vote-labels"><span>The Reading Room <b>46%</b></span><span className="vote-total">14 demo votes</span></div>
-          <Button variant="outline" size="sm" render={<Link href="/venuevote" />}>See the poll <ArrowRight /></Button>
+          <Link href="/venuevote" className={buttonVariants({ variant: "outline", size: "sm" })}>See the poll <ArrowRight /></Link>
         </Card>
       </section>
       <footer className="dashboard-footer">Made for the in-between moments. <span>Demo content is illustrative and not affiliated with or endorsed by IIT Madras.</span></footer>
