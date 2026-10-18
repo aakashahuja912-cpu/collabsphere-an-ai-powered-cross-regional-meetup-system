@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import type { ReactNode } from "react"
+import { cookies } from "next/headers"
+import { ThemeProvider } from "@/components/theme-provider"
 import "leaflet/dist/leaflet.css"
 import "./globals.css"
 import "./platform.css"
@@ -24,10 +26,13 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 }
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const cookieStore = await cookies()
+  const initialTheme = cookieStore.get("collabsphere-theme")?.value === "light" ? "light" : "dark"
+
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body>{children}</body>
+    <html lang="en" data-theme={initialTheme} className={cn("font-sans", geist.variable)}>
+      <body><ThemeProvider initialTheme={initialTheme}>{children}</ThemeProvider></body>
     </html>
   )
 }

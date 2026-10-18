@@ -161,3 +161,87 @@
 @media (max-width:720px) { .content-wrap { padding:0 17px 32px; }.topbar { padding-inline:18px; }.search-wrap { width:175px; }.welcome-row { align-items:flex-start; flex-direction:column; }.welcome-actions { width:100%; }.welcome-actions button { flex:1; justify-content:center; }.hero-grid,.overview-grid,.bottom-grid { grid-template-columns:1fr; }.hero-card { min-height:245px; }.hero-copy { width:58%; }.hero-card .orb-stage { width:45%; }.match-footer { align-items:center; flex-direction:row; }.mini-map-wrap { height:200px; }.map-page-layout { grid-template-columns:1fr; }.page-layout { grid-template-columns:1fr; }.page-layout .full-column { grid-column:auto; }.venue-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.venue-card:last-child { grid-column:1/-1; }.map-panel-tall { min-height:335px; } }
 @media (max-width:640px) { .sidebar { display:none; }.main-frame { margin-left:0; padding-bottom:74px; }.topbar { display:none; }.mobile-header { position:sticky; top:0; z-index:20; height:57px; display:flex; align-items:center; justify-content:space-between; padding:0 16px; border-bottom:1px solid var(--line); background:rgba(8,11,20,.95); backdrop-filter:blur(14px); }.mobile-header .sidebar-brand { min-height:0; padding:0; margin:0; }.mobile-brand { display:flex; align-items:center; gap:8px; }.mobile-brand .brand-mark { width:25px; height:25px; }.mobile-brand .brand-wordmark { display:inline; font-size:13px; }.mobile-actions { display:flex; align-items:center; gap:6px; }.mobile-actions a,.mobile-actions button { width:33px; height:33px; display:grid; place-items:center; border:0; border-radius:8px; color:#98a3b9; background:transparent; }.mobile-dock { position:fixed; inset:auto 0 0; z-index:40; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); padding:8px 6px calc(8px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); background:rgba(8,11,20,.97); backdrop-filter:blur(14px); }.mobile-dock a { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; min-height:43px; color:#808ba4; font-size:9px; }.mobile-dock a[aria-current="page"] { color:var(--cyan); }.dashboard-page { padding-top:20px; }.welcome-row h1 { max-width:440px; margin-top:10px; font-size:28px; }.welcome-actions button:first-child svg { display:block; }.demo-ribbon { flex-wrap:wrap; padding:8px 9px; line-height:1.45; }.demo-ribbon > span:nth-of-type(2) { order:3; width:100%; padding-left:14px; }.demo-ribbon a { font-size:9px; }.hero-card { min-height:248px; }.hero-copy { width:65%; padding:20px 0 19px 17px; }.hero-copy h2 { font-size:23px; }.hero-copy > p { max-width:250px; font-size:10px; }.hero-card .orb-stage { top:31px; right:-8px; width:42%; }.hero-metrics { gap:12px; font-size:8px; }.hero-metrics span { gap:4px; }.hero-metrics b { font-size:12px; }.overview-grid { gap:12px; margin-top:12px; }.content-card,.venue-peek { padding:14px; }.bottom-grid { gap:12px; margin-top:12px; }.page-heading { align-items:flex-start; flex-direction:column; padding-top:22px; }.page-heading h1 { font-size:27px; }.page-heading > button { align-self:flex-start; }.event-grid,.matching-grid { grid-template-columns:1fr; }.venue-grid { grid-template-columns:1fr; }.venue-card:last-child { grid-column:auto; }.content-toolbar { flex-wrap:wrap; }.content-toolbar input { flex:1 1 100%; width:100%; }.results-count { margin-left:0; }.dashboard-footer { flex-direction:column; }.dashboard-footer span { text-align:left; }.proposal-dialog { max-height:88vh; padding:16px; }.proposal-form .form-grid { gap:7px; }.auth-page { padding:18px 20px 14px; }.auth-main { padding:38px 0; }.auth-main h1 { font-size:39px; }.auth-orbit { top:30px; right:-205px; width:190px; height:190px; }.auth-footer { font-size:7px; }.toast-region { right:12px; bottom:88px; }.map-panel-tall { min-height:300px; } }
 @media (max-width:390px) { .hero-copy { width:69%; }.hero-card .orb-stage { right:-24px; width:42%; opacity:.8; }.hero-copy h2 { font-size:21px; }.hero-copy > p { max-width:215px; }.hero-metrics { flex-direction:column; gap:5px; }.welcome-row h1 { font-size:26px; }.mobile-dock a { font-size:8px; } }
+
+.theme-toggle { width:34px; height:34px; display:grid; place-items:center; border:1px solid var(--line); border-radius:9px; color:var(--text); background:var(--surface-raised); transition:background .18s, color .18s, border-color .18s; }
+.theme-toggle:hover { border-color:var(--cyan); color:var(--cyan); }
+.theme-toggle:focus-visible { outline:2px solid var(--cyan); outline-offset:3px; }
+.mobile-actions .theme-toggle { width:33px; height:33px; border-color:transparent; background:transparent; }
+
+html[data-theme="light"] .sidebar,
+html[data-theme="light"] .mobile-header,
+html[data-theme="light"] .mobile-dock { background:rgba(255,255,255,.96); }
+html[data-theme="light"] .brand-wordmark,
+html[data-theme="light"] .nav-link[data-active="true"],
+html[data-theme="light"] .welcome-row h1,
+html[data-theme="light"] .hero-copy h2,
+html[data-theme="light"] .match-card h3,
+html[data-theme="light"] .card-heading h2,
+html[data-theme="light"] .event-row-copy strong,
+html[data-theme="light"] .page-heading h1,
+html[data-theme="light"] .section-panel,
+html[data-theme="light"] .content-card,
+html[data-theme="light"] .network-row,
+html[data-theme="light"] .leaderboard-row,
+html[data-theme="light"] .notification-row,
+html[data-theme="light"] .venue-card h3,
+html[data-theme="light"] .profile-summary h3 { color:var(--text); }
+html[data-theme="light"] .brand-wordmark span,
+html[data-theme="light"] .sidebar-nav-label,
+html[data-theme="light"] .nav-link,
+html[data-theme="light"] .topbar-crumb,
+html[data-theme="light"] .topbar-crumb strong,
+html[data-theme="light"] .topbar-account,
+html[data-theme="light"] .eyebrow,
+html[data-theme="light"] .welcome-row > div:first-child > p,
+html[data-theme="light"] .hero-copy > p,
+html[data-theme="light"] .match-card > p,
+html[data-theme="light"] .event-row-copy > span,
+html[data-theme="light"] .page-heading p,
+html[data-theme="light"] .map-page-list li,
+html[data-theme="light"] .map-page-list li small,
+html[data-theme="light"] .event-tile p,
+html[data-theme="light"] .event-tile-meta,
+html[data-theme="light"] .network-row small,
+html[data-theme="light"] .leaderboard-row small,
+html[data-theme="light"] .notification-row p,
+html[data-theme="light"] .profile-summary p { color:#5e6b80; }
+html[data-theme="light"] .search-wrap input,
+html[data-theme="light"] .content-toolbar input,
+html[data-theme="light"] .content-toolbar select,
+html[data-theme="light"] .proposal-form input,
+html[data-theme="light"] .proposal-form textarea,
+html[data-theme="light"] .proposal-form select,
+html[data-theme="light"] .ai-prompt-row textarea { color:var(--text); background:#fff; }
+html[data-theme="light"] .sidebar,
+html[data-theme="light"] .topbar,
+html[data-theme="light"] .sidebar-account,
+html[data-theme="light"] .event-row,
+html[data-theme="light"] .match-footer,
+html[data-theme="light"] .network-row,
+html[data-theme="light"] .leaderboard-row,
+html[data-theme="light"] .notification-row,
+html[data-theme="light"] .profile-summary { border-color:var(--line); }
+html[data-theme="light"] .content-card,
+html[data-theme="light"] .section-panel,
+html[data-theme="light"] .match-card,
+html[data-theme="light"] .event-tile,
+html[data-theme="light"] .venue-card,
+html[data-theme="light"] .proposal-dialog { background:#fff; }
+html[data-theme="light"] .hero-card { border-color:rgba(8,127,157,.2); background:radial-gradient(360px 220px at 79% 60%,rgba(8,127,157,.1),transparent 75%),linear-gradient(105deg,#edf7fa,#f2f1fb); }
+html[data-theme="light"] .hero-metrics b,
+html[data-theme="light"] .event-date strong,
+html[data-theme="light"] .venue-vote-labels b { color:#26344b; }
+html[data-theme="light"] .map-loading { color:#52627b; background:#edf2f7; }
+html[data-theme="light"] .mini-map-wrap,
+html[data-theme="light"] .map-panel { background:#e8eef5; }
+html[data-theme="light"] .regional-leaflet-map { background:#e8eef5; }
+html[data-theme="light"] .leaflet-container { background:#e8eef5; color:#243149; }
+html[data-theme="light"] .leaflet-popup-content-wrapper,
+html[data-theme="light"] .leaflet-popup-tip { color:#243149; background:#fff; }
+html[data-theme="light"] .leaflet-control-zoom a { color:#243149 !important; background:#fff !important; }
+html[data-theme="light"] .proposal-dialog { color:var(--text); }
+html[data-theme="light"] .proposal-form label,
+html[data-theme="light"] .auth-form label { color:#52627b; }
+html[data-theme="light"] .mobile-dock a[aria-current="page"] { color:var(--cyan); }
+
+html[data-theme="light"] body { background:radial-gradient(1000px 580px at 86% -12%,rgba(74,105,175,.08),transparent 62%),var(--background); }
