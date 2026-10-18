@@ -9,6 +9,7 @@ export type EventSummary = {
   registration_deadline?: string | null
   description?: string
   status?: string
+  creator_id?: string
   isDemo?: boolean
 }
 

@@ -10,7 +10,7 @@ import { EventProposalDialog } from "@/components/event-proposal-dialog"
 import { SectionContent, type SectionKey } from "@/components/section-content"
 import type { EventSummary } from "@/lib/demo-data"
 
-type SessionUser = { id: string; email: string; displayName: string } | null
+type SessionUser = { id: string; email: string; displayName: string; role: string } | null
 
 const navigation = [
   { title: "OVERVIEW", links: [{ href: "/", name: "Home", icon: Activity, key: "home" }] },
@@ -19,7 +19,7 @@ const navigation = [
   { title: "YOUR COMMUNITY", links: [{ href: "/leaderboard", name: "Leaderboard", icon: Trophy, key: "leaderboard" }, { href: "/notifications", name: "Notifications", icon: Bell, key: "notifications" }, { href: "/profile", name: "My profile", icon: UserRound, key: "profile" }] },
 ]
 const mobileLinks = [{ href: "/", name: "Home", icon: Activity }, { href: "/map", name: "Map", icon: Map }, { href: "/discover", name: "Discover", icon: Compass }, { href: "/events", name: "Events", icon: CalendarDays }, { href: "/profile", name: "Profile", icon: UserRound }]
-const sectionNames: Record<SectionKey, string> = { home: "Home", map: "Community map", discover: "Discover people", events: "Events", venuevote: "VenueVote", copilot: "AI Copilot", network: "Collaboration network", leaderboard: "Leaderboard", notifications: "Notifications", profile: "My profile" }
+const sectionNames: Record<SectionKey, string> = { home: "Home", map: "Community map", discover: "Discover people", events: "Events", venuevote: "VenueVote", copilot: "AI Copilot", network: "Collaboration network", leaderboard: "Leaderboard", notifications: "Notifications", profile: "My profile", admin: "Administration" }
 
 function Brand() {
   return <Link href="/" className="sidebar-brand" aria-label="Collabverse home"><span className="brand-mark"><CircleDot size={18} /></span><span className="brand-wordmark">collab<span>verse</span></span></Link>

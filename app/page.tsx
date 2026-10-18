@@ -16,12 +16,12 @@ async function getDashboardData() {
   ])
 
   const [{ data: profile }, { data: proposals }] = await Promise.all([
-    user ? supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle() : Promise.resolve({ data: null }),
+    user ? supabase.from("profiles").select("display_name, role").eq("id", user.id).maybeSingle() : Promise.resolve({ data: null }),
     user ? supabase.from("events").select("id, title, category, format, city, starts_at, capacity, status, description").eq("creator_id", user.id).order("created_at", { ascending: false }).limit(5) : Promise.resolve({ data: null }),
   ])
 
   return {
-    user: user ? { id: user.id, email: user.email ?? "", displayName: profile?.display_name ?? user.user_metadata?.display_name ?? "Student" } : null,
+    user: user ? { id: user.id, email: user.email ?? "", displayName: profile?.display_name ?? user.user_metadata?.display_name ?? "Student", role: profile?.role ?? "student" } : null,
     events: [...(events ?? []).map((event) => ({ ...event, isDemo: false } as EventSummary)), ...demoEvents],
     proposals: (proposals ?? []).map((event) => ({ ...event, isDemo: false } as EventSummary)),
   }
