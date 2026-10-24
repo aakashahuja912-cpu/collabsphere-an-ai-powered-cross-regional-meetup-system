@@ -24,11 +24,12 @@ export function AuthForm({ callbackError = false }: { callbackError?: boolean })
     setSuccess(false)
     setPending(true)
     const supabase = createClient()
+    const callbackOrigin = process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ?? window.location.origin
 
     try {
       if (forgotPassword) {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: `${window.location.origin}/auth/callback?next=/auth/reset-password`,
+          redirectTo: `${callbackOrigin}/auth/callback?next=/auth/reset-password`,
         })
         if (error) throw error
         setSuccess(true)
@@ -40,7 +41,7 @@ export function AuthForm({ callbackError = false }: { callbackError?: boolean })
           password,
           options: {
             data: { display_name: displayName },
-            emailRedirectTo: `${window.location.origin}/auth/callback?next=/`,
+            emailRedirectTo: `${callbackOrigin}/auth/callback?next=/`,
           },
         })
         if (error) throw error
