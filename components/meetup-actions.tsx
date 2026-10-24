@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 import { QrCode, ScanLine } from "lucide-react"
 import { QRCodeSVG } from "qrcode.react"
 import { Button } from "@/components/ui/button"
@@ -92,7 +93,7 @@ export function MeetupActions({ eventId, eventTitle, canVerify, userId }: Props)
 
   const qrValue = registration ? JSON.stringify({ eventId, registrationId: registration.registrationId, secret: registration.secret }) : ""
   return <div className="meetup-actions">
-    {userId ? <Button variant="outline" size="sm" onClick={() => void register()} disabled={busy}><QrCode size={13} />{registration ? "Refresh my QR" : "Register"}</Button> : <a className="meetup-signin" href="/auth">Sign in to register</a>}
+    {userId ? <Button variant="outline" size="sm" onClick={() => void register()} disabled={busy}><QrCode size={13} />{registration ? "Refresh my QR" : "Register"}</Button> : <Link className="meetup-signin" href="/auth">Sign in to register</Link>}
     {registration && <div className="registration-ticket"><QRCodeSVG value={qrValue} size={144} level="Q" includeMargin aria-label={`Private attendance QR for ${eventTitle}`} /><p><strong>{eventTitle}</strong><span>Keep this QR private. An organizer scans it to verify your attendance.</span></p></div>}
     {canVerify && <details className="checkin-panel"><summary><ScanLine size={14} /> Organizer check-in</summary><form onSubmit={verifyAttendance}><label htmlFor={`qr-scan-${eventId}`}>Scan attendee code or paste its QR contents</label>{cameraOpen && <div className="camera-preview"><video ref={videoRef} muted playsInline aria-label="Camera scanning an attendee QR code" /><Button type="button" variant="outline" size="sm" onClick={stopCamera}>Stop camera</Button></div>}<textarea id={`qr-scan-${eventId}`} value={payload} onChange={(event) => setPayload(event.target.value)} rows={2} placeholder='{"eventId":"…","registrationId":"…","secret":"…"}' required /><div className="checkin-actions"><Button type="button" variant="outline" size="sm" onClick={() => void openCamera()}>Open camera</Button><Button type="submit" size="sm" disabled={busy}>{busy ? "Verifying…" : "Verify attendance"}</Button></div></form></details>}
     {status && <p className="form-note" role="status">{status}</p>}
