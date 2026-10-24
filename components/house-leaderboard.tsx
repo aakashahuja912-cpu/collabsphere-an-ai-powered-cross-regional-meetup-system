@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import useSWR from "swr"
+import { AdminConsole } from "@/components/admin-console"
 import { ShieldCheck, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -28,10 +29,5 @@ export function HouseLeaderboard({ isAdmin, onNotify }: { isAdmin: boolean; onNo
 }
 
 function AdminMount({ onNotify }: { onNotify: (message: string) => void }) {
-  const { AdminConsole } = requireAdminConsole()
   return <AdminConsole onNotify={onNotify} />
-}
-
-function requireAdminConsole() {
-  return { AdminConsole: require("@/components/admin-console").AdminConsole as typeof import("@/components/admin-console").AdminConsole }
 }

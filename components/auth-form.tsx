@@ -10,6 +10,7 @@ import { createClient } from "@/lib/supabase/client"
 export function AuthForm({ callbackError = false }: { callbackError?: boolean }) {
   const router = useRouter()
   const [mode, setMode] = useState<"signin" | "signup">("signup")
+  const [forgotPassword, setForgotPassword] = useState(false)
   const [pending, setPending] = useState(false)
   const [message, setMessage] = useState(callbackError ? "The sign-in link expired. Please try again." : "")
   const [success, setSuccess] = useState(false)
@@ -23,16 +24,24 @@ export function AuthForm({ callbackError = false }: { callbackError?: boolean })
     setSuccess(false)
     setPending(true)
     const supabase = createClient()
+    const callbackOrigin = process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ?? window.location.origin
 
     try {
-      if (mode === "signup") {
+      if (forgotPassword) {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${callbackOrigin}/auth/callback?next=/auth/reset-password`,
+        })
+        if (error) throw error
+        setSuccess(true)
+        setMessage("Check your inbox for a password reset link.")
+      } else if (mode === "signup") {
         const displayName = String(data.get("displayName")).trim()
         const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             data: { display_name: displayName },
-            emailRedirectTo: `${window.location.origin}/auth/callback?next=/`,
+            emailRedirectTo: `${callbackOrigin}/auth/callback?next=/`,
           },
         })
         if (error) throw error
@@ -53,16 +62,19 @@ export function AuthForm({ callbackError = false }: { callbackError?: boolean })
 
   return (
     <div className="auth-form-wrap">
-      <div className="auth-switch" role="tablist" aria-label="Account action">
+      {!forgotPassword && <div className="auth-switch" role="tablist" aria-label="Account action">
         <button type="button" role="tab" aria-selected={mode === "signup"} onClick={() => { setMode("signup"); setMessage(""); setSuccess(false) }}>Create account</button>
         <button type="button" role="tab" aria-selected={mode === "signin"} onClick={() => { setMode("signin"); setMessage(""); setSuccess(false) }}>Sign in</button>
-      </div>
+      </div>}
       <form onSubmit={handleSubmit} className="auth-form">
-        {mode === "signup" && <div><label htmlFor="display-name">Name</label><Input id="display-name" name="displayName" autoComplete="name" placeholder="How should we call you?" minLength={2} maxLength={80} required /></div>}
+        {forgotPassword && <div><h2>Reset your password</h2><p>Enter your email and we&apos;ll send you a secure reset link.</p></div>}
+        {!forgotPassword && mode === "signup" && <div><label htmlFor="display-name">Name</label><Input id="display-name" name="displayName" autoComplete="name" placeholder="How should we call you?" minLength={2} maxLength={80} required /></div>}
         <div><label htmlFor="auth-email">Email</label><Input id="auth-email" type="email" name="email" autoComplete="email" placeholder="you@example.com" required /></div>
-        <div><label htmlFor="auth-password">Password</label><Input id="auth-password" type="password" name="password" autoComplete={mode === "signup" ? "new-password" : "current-password"} placeholder="At least 8 characters" minLength={8} required /></div>
+        {!forgotPassword && <div><label htmlFor="auth-password">Password</label><Input id="auth-password" type="password" name="password" autoComplete={mode === "signup" ? "new-password" : "current-password"} placeholder="At least 8 characters" minLength={8} required /></div>}
+        {!forgotPassword && mode === "signin" && <button type="button" className="auth-link" onClick={() => { setForgotPassword(true); setMessage(""); setSuccess(false) }}>Forgot password?</button>}
         {message && <p className={`auth-feedback${success ? " auth-feedback-success" : ""}`} role={success ? "status" : "alert"}>{message}</p>}
-        <Button type="submit" className="auth-submit" disabled={pending || success}>{pending && <LoaderCircle className="spin" size={16} />}{success ? "Check your email" : mode === "signup" ? "Create account" : "Sign in"}{!pending && !success && <ArrowRight size={16} />}</Button>
+        <Button type="submit" className="auth-submit" disabled={pending || success}>{pending && <LoaderCircle className="spin" size={16} />}{success ? "Check your email" : forgotPassword ? "Send reset link" : mode === "signup" ? "Create account" : "Sign in"}{!pending && !success && <ArrowRight size={16} />}</Button>
+        {forgotPassword && <button type="button" className="auth-link" onClick={() => { setForgotPassword(false); setMessage(""); setSuccess(false) }}>Back to sign in</button>}
       </form>
       <p className="auth-terms">By continuing, you agree to keep your account secure and respect other community members.</p>
     </div>
